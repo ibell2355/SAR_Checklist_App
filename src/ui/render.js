@@ -24,27 +24,7 @@ export function renderLanding() {
       </div>
       <div class="landing-bottom">
         <div class="landing-meta">
-          <div class="qr-placeholder" role="button" tabindex="0" title="Replace with deployment QR code">
-            <svg viewBox="0 0 60 60" width="44" height="44" xmlns="http://www.w3.org/2000/svg">
-              <rect width="60" height="60" rx="6" fill="var(--surface)" stroke="var(--border)" stroke-width="1.5"/>
-              <g fill="var(--primary)" opacity="0.25">
-                <rect x="6" y="6" width="18" height="18" rx="2"/>
-                <rect x="36" y="6" width="18" height="18" rx="2"/>
-                <rect x="6" y="36" width="18" height="18" rx="2"/>
-              </g>
-              <g fill="var(--primary)" opacity="0.45">
-                <rect x="9" y="9" width="12" height="12" rx="1"/>
-                <rect x="39" y="9" width="12" height="12" rx="1"/>
-                <rect x="9" y="39" width="12" height="12" rx="1"/>
-              </g>
-              <g fill="var(--primary)" opacity="0.15">
-                <rect x="28" y="6" width="4" height="4"/><rect x="6" y="28" width="4" height="4"/>
-                <rect x="28" y="28" width="4" height="4"/><rect x="36" y="36" width="4" height="4"/>
-                <rect x="44" y="36" width="4" height="4"/><rect x="36" y="44" width="4" height="4"/>
-                <rect x="44" y="44" width="4" height="4"/><rect x="50" y="50" width="4" height="4"/>
-              </g>
-            </svg>
-          </div>
+          <img class="qr-code" src="./assets/SAR_Checklist_App_QR.png" alt="App QR Code" width="44" height="44">
           <button class="btn btn-sm" data-action="toggle-theme">${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
         </div>
         <p class="reminder-text">This tool does not replace required notebook documentation.</p>
@@ -63,21 +43,19 @@ export function renderChecklist(config, state) {
 
   let html = `
     <div class="checklist-header">
-      <div class="row between align-center">
-        <button class="btn btn-sm" data-action="back">&larr; Back</button>
-        <div class="checklist-title-area">
-          <h2 class="checklist-title">${esc(config.title)}</h2>
-          <span class="overall-progress badge">${completed}/${allCb.length}</span>
-        </div>
+      <div class="checklist-title-area">
+        <h2 class="checklist-title">${esc(config.title)}</h2>
+        <span class="overall-progress badge">${completed}/${allCb.length}</span>
       </div>
+      ${config.subtitle ? `<p class="subtle checklist-subtitle">${esc(config.subtitle)}</p>` : ''}
       <div class="row between align-center gap-sm checklist-controls">
         <div class="row gap-sm">
+          <button class="btn btn-xs" data-action="back">&larr; Back</button>
           <button class="btn btn-xs" data-action="expand-all">Expand All</button>
           <button class="btn btn-xs" data-action="collapse-all">Collapse All</button>
         </div>
         <div id="connectivity-pill" class="connectivity-pill online">Online</div>
       </div>
-      ${config.subtitle ? `<p class="subtle checklist-subtitle">${esc(config.subtitle)}</p>` : ''}
     </div>`;
 
   for (const [sectionId, section] of Object.entries(sections)) {
@@ -138,7 +116,7 @@ function renderTextField(id, item, state) {
   const value = state.fields[id] || '';
   return `
     <div class="field-item">
-      <label class="field-label">${esc(item.label)}</label>
+      <label class="field-label">${esc(item.label)}${item.helper ? `<span class="helper-text">${esc(item.helper)}</span>` : ''}</label>
       <input type="text" data-field="${id}" value="${escAttr(value)}" placeholder="${escAttr(item.placeholder || '')}">
     </div>`;
 }
@@ -147,9 +125,9 @@ function renderTeamList(id, item, state) {
   const roles = item.roles || [];
   return `
     <div class="team-list-container">
-      <label class="field-label">${esc(item.label)}</label>
-      <div class="team-members-list">${renderTeamMembersInner(roles, state.teamMembers)}</div>
+      <label class="field-label">${esc(item.label)}${item.helper ? `<span class="helper-text">${esc(item.helper)}</span>` : ''}</label>
       <button class="btn btn-sm" data-action="add-member" style="margin-top:6px">+ Add Team Member</button>
+      <div class="team-members-list">${renderTeamMembersInner(roles, state.teamMembers)}</div>
     </div>`;
 }
 

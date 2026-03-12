@@ -25,6 +25,11 @@ sections:
   briefing_team:
     title: BRIEFING & TEAM
     items:
+      team_members:
+        type: team_list
+        label: Team Members
+        roles: [medical, navigator, comms]
+        report: true
       confirm_briefing:
         type: checkbox
         label: Confirm team received all briefing info
@@ -38,11 +43,6 @@ sections:
       experience_check:
         type: checkbox
         label: Quick experience / familiarity check if needed
-      team_members:
-        type: team_list
-        label: Team Members
-        roles: [medical, navigator, comms]
-        report: true
 
   role_assignments:
     title: ROLE ASSIGNMENTS
@@ -127,12 +127,11 @@ sections:
       fit_for_duty:
         type: checkbox
         label: Fit for duty / personal readiness confirmed
-      eye_pro:
+      individual_ppe:
         type: checkbox
-        label: Eye pro (wooded areas) / gloves / long sleeves & pants
-      bear_spray:
-        type: checkbox
-        label: Bear spray coverage if applicable
+        label: Individual PPE confirmed
+        helper: Confirm iPro, gloves, long sleeves, bear spray coverage, and other task-appropriate PPE.
+        important: true
 
   hazard_assessment:
     title: HAZARD ASSESSMENT
