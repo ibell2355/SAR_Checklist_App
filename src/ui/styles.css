@@ -486,6 +486,7 @@ input[type="text"]::placeholder { color: var(--muted); opacity: 0.7; }
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
   margin-bottom: 16px;
   gap: 8px;
 }
