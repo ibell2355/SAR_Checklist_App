@@ -28,7 +28,7 @@ sections:
       team_members:
         type: team_list
         label: Team Members
-        roles: [medical, navigator, comms]
+        roles: [Medical, Navigator, Comms, Driver]
         report: true
       confirm_briefing:
         type: checkbox
@@ -36,44 +36,37 @@ sections:
         helper: Confirm team's note completeness and pass along any additional information.
       record_names:
         type: checkbox
-        label: Record team member names; confirm all signed in
+        label: Confirm all members have signed in
         important: true
       experience_check:
         type: checkbox
-        label: Quick experience / familiarity check if needed
-
-  role_assignments:
-    title: ROLE ASSIGNMENTS
-    items:
-      assign_roles:
+        label: Confirm team experience level
+      Role_assignment:
         type: checkbox
-        label: Navigator / Comms / Lead Medical / 2IC
-        helper: Use the team member list above to assign specific roles
-      driver_transport:
-        type: checkbox
-        label: Driver / transport responsibility if applicable
+        label: Assign Navigator / Comms / Lead Medical / Driver
+        helper: Use team member list above.
 
   task_navigation:
     title: TASK, NAVIGATION, & TRANSPORT
     items:
       confirm_segment:
         type: checkbox
-        label: Confirm assigned segment / task
+        label: Communicate assigned segment / task
       confirm_search_type:
         type: checkbox
         label: Confirm search type (hasty, line, etc.)
       confirm_route:
         type: checkbox
-        label: Confirm route plan to segment start point
+        label: Confirm segment start point / drop off point
+      confirm_transport:
+        type: checkbox
+        label: Confirm transport arrangements to segment
       confirm_nav_tools:
         type: checkbox
-        label: Confirm nav tools / CalTopo loaded
+        label: Confirm nav tools / CalTopo loaded for all
       confirm_tracks:
         type: checkbox
         label: Confirm who is recording tracks (all / designated)
-      confirm_transport:
-        type: checkbox
-        label: Confirm transport arrangements & vehicle assignments
 
   communications:
     title: COMMUNICATIONS
@@ -88,10 +81,6 @@ sections:
         label: Check-in Interval
         placeholder: e.g. 30 min
         report: true
-      confirm_radio:
-        type: checkbox
-        label: Confirm radio channel & check-in interval
-        important: true
       radio_check:
         type: checkbox
         label: Complete radio check
@@ -100,7 +89,7 @@ sections:
         label: Note any specific comms requests from Command
       advise_command:
         type: checkbox
-        label: Will advise Command when proceeding to segment
+        label: Advise Command when proceeding to segment
 
   medical:
     title: MEDICAL
@@ -108,27 +97,25 @@ sections:
       highest_medical:
         type: checkbox
         label: Identify highest medical certification on team
+        helper: Likely candidate for lead medical
       med_kit:
         type: checkbox
-        label: Confirm med kit locations & who is carrying
+        label: Confirm personal med kits and locations carried
       required_meds:
         type: checkbox
-        label: Members with required meds have them on person
-      private_disclosure:
-        type: checkbox
-        label: "Remind: private disclosure welcome at any time"
-        helper: Sensitive item — ensure a safe space for disclosure
+        label: Confirm team medical conditions and medication carried
+        helper: Sensitive item, ensure a safe space for disclosure. Confirm where meds are carried.
 
   ppe_readiness:
     title: PPE & READINESS
     items:
       fit_for_duty:
         type: checkbox
-        label: Fit for duty / personal readiness confirmed
+        label: Confirm fit for duty / personal readiness
       individual_ppe:
         type: checkbox
-        label: Individual PPE confirmed
-        helper: Confirm iPro, gloves, long sleeves, bear spray coverage, and other task-appropriate PPE.
+        label: Confirm individual PPE
+        helper: iPro, gloves, long sleeves, bear spray coverage, and other task-appropriate PPE.
         important: true
 
   hazard_assessment:
@@ -138,22 +125,19 @@ sections:
         type: checkbox
         label: Re-state key hazards from main briefing
         important: true
-      what_if:
-        type: checkbox
-        label: '"What will we do if..." discussion for major risks'
       radems:
         type: checkbox
-        label: Complete RADeMS
+        label: Complete RADeMS and send to command
       time_constraints:
         type: checkbox
-        label: Confirm time constraints / darkness / hard stop
+        label: Confirm any time constraints / darkness / hard stops
 
   documentation:
     title: DOCUMENTATION & PROTOCOLS
     items:
       document_findings:
         type: checkbox
-        label: "Remind team: document findings in personal notes"
+        label: Remind team on note taking protocol
       review_protocol:
         type: checkbox
         label: Review protocol for clue found / subject found
@@ -163,7 +147,7 @@ sections:
     items:
       questions:
         type: checkbox
-        label: "Ask: questions, concerns, anything missed?"
+        label: Ask team: questions, concerns, anything missed?
       remind_approach:
         type: checkbox
-        label: "Remind: approach TL privately any time with concerns"
+        label: Remind team they can approach privately any time with concerns
