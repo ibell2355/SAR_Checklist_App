@@ -33,9 +33,7 @@ sections:
       confirm_briefing:
         type: checkbox
         label: Confirm team received all briefing info
-      pass_tl_info:
-        type: checkbox
-        label: Pass along any team-lead-only information
+        helper: Confirm team's note completeness and pass along any additional information.
       record_names:
         type: checkbox
         label: Record team member names; confirm all signed in

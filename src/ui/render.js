@@ -24,7 +24,7 @@ export function renderLanding() {
       </div>
       <div class="landing-bottom">
         <div class="landing-meta">
-          <img class="qr-code" src="./assets/SAR_Checklist_App_QR.png" alt="App QR Code" width="44" height="44">
+          <img class="qr-code" src="./assets/SAR_Checklist_App_QR.png" alt="App QR Code" width="44" height="44" role="button" tabindex="0" data-action="show-qr">
           <button class="btn btn-sm" data-action="toggle-theme">${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
         </div>
         <p class="reminder-text">This tool does not replace required notebook documentation.</p>

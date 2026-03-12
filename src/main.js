@@ -121,6 +121,10 @@ function handleClick(e) {
       toggleTheme();
       break;
 
+    case 'show-qr':
+      showQrOverlay();
+      break;
+
     case 'back':
       location.hash = '#/';
       break;
@@ -310,6 +314,17 @@ function showToast(msg) {
   toast.classList.add('visible');
   clearTimeout(toast._timer);
   toast._timer = setTimeout(() => toast.classList.remove('visible'), 1800);
+}
+
+/* ---- QR overlay ---- */
+
+function showQrOverlay() {
+  if (document.getElementById('qr-overlay')) return;
+  const overlay = document.createElement('div');
+  overlay.id = 'qr-overlay';
+  overlay.innerHTML = '<img src="./assets/SAR_Checklist_App_QR.png" alt="QR Code">';
+  document.body.appendChild(overlay);
+  overlay.addEventListener('click', () => overlay.remove());
 }
 
 /* ---- Connectivity ---- */
