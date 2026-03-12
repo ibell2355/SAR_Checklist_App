@@ -1,0 +1,11 @@
+{
+  "name": "sar-checklist-app",
+  "version": "1.0.0",
+  "buildDate": "2026-03-11",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "start": "py -3 -m http.server 4173 --bind 127.0.0.1",
+    "stamp": "node -e \"const fs=require('fs'),p=JSON.parse(fs.readFileSync('package.json'));p.buildDate=new Date().toISOString().slice(0,10);fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\\n')\""
+  }
+}

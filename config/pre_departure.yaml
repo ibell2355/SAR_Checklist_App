@@ -1,0 +1,172 @@
+# ============================================================
+# PSAR Team Lead Pre-Departure Checklist
+# ============================================================
+# Edit this file to change checklist content without modifying
+# app code. The app reads this YAML at startup.
+#
+# Supported item types:
+#   checkbox   — standard check-off item
+#   text       — short text input field
+#   team_list  — team member list with role assignment
+#
+# Optional item fields:
+#   important  — true to visually emphasize the item
+#   helper     — tooltip / helper text shown below the item
+#   report     — true to include field value in the report
+#   placeholder — placeholder text for text inputs
+# ============================================================
+
+id: pre_departure
+title: Team Lead Pre-Departure Checklist
+subtitle: Complete before leaving Command Post
+version: 1
+
+sections:
+  briefing_team:
+    title: BRIEFING & TEAM
+    items:
+      confirm_briefing:
+        type: checkbox
+        label: Confirm team received all briefing info
+      pass_tl_info:
+        type: checkbox
+        label: Pass along any team-lead-only information
+      record_names:
+        type: checkbox
+        label: Record team member names; confirm all signed in
+        important: true
+      experience_check:
+        type: checkbox
+        label: Quick experience / familiarity check if needed
+      team_members:
+        type: team_list
+        label: Team Members
+        roles: [medical, navigator, comms]
+        report: true
+
+  role_assignments:
+    title: ROLE ASSIGNMENTS
+    items:
+      assign_roles:
+        type: checkbox
+        label: Navigator / Comms / Lead Medical / 2IC
+        helper: Use the team member list above to assign specific roles
+      driver_transport:
+        type: checkbox
+        label: Driver / transport responsibility if applicable
+
+  task_navigation:
+    title: TASK, NAVIGATION, & TRANSPORT
+    items:
+      confirm_segment:
+        type: checkbox
+        label: Confirm assigned segment / task
+      confirm_search_type:
+        type: checkbox
+        label: Confirm search type (hasty, line, etc.)
+      confirm_route:
+        type: checkbox
+        label: Confirm route plan to segment start point
+      confirm_nav_tools:
+        type: checkbox
+        label: Confirm nav tools / CalTopo loaded
+      confirm_tracks:
+        type: checkbox
+        label: Confirm who is recording tracks (all / designated)
+      confirm_transport:
+        type: checkbox
+        label: Confirm transport arrangements & vehicle assignments
+
+  communications:
+    title: COMMUNICATIONS
+    items:
+      radio_channel:
+        type: text
+        label: Radio Channel
+        placeholder: e.g. Channel 3
+        report: true
+      checkin_interval:
+        type: text
+        label: Check-in Interval
+        placeholder: e.g. 30 min
+        report: true
+      confirm_radio:
+        type: checkbox
+        label: Confirm radio channel & check-in interval
+        important: true
+      radio_check:
+        type: checkbox
+        label: Complete radio check
+      comms_requests:
+        type: checkbox
+        label: Note any specific comms requests from Command
+      advise_command:
+        type: checkbox
+        label: Will advise Command when proceeding to segment
+
+  medical:
+    title: MEDICAL
+    items:
+      highest_medical:
+        type: checkbox
+        label: Identify highest medical certification on team
+      med_kit:
+        type: checkbox
+        label: Confirm med kit locations & who is carrying
+      required_meds:
+        type: checkbox
+        label: Members with required meds have them on person
+      private_disclosure:
+        type: checkbox
+        label: "Remind: private disclosure welcome at any time"
+        helper: Sensitive item — ensure a safe space for disclosure
+
+  ppe_readiness:
+    title: PPE & READINESS
+    items:
+      fit_for_duty:
+        type: checkbox
+        label: Fit for duty / personal readiness confirmed
+      eye_pro:
+        type: checkbox
+        label: Eye pro (wooded areas) / gloves / long sleeves & pants
+      bear_spray:
+        type: checkbox
+        label: Bear spray coverage if applicable
+
+  hazard_assessment:
+    title: HAZARD ASSESSMENT
+    items:
+      key_hazards:
+        type: checkbox
+        label: Re-state key hazards from main briefing
+        important: true
+      what_if:
+        type: checkbox
+        label: '"What will we do if..." discussion for major risks'
+      radems:
+        type: checkbox
+        label: Complete RADeMS
+      time_constraints:
+        type: checkbox
+        label: Confirm time constraints / darkness / hard stop
+
+  documentation:
+    title: DOCUMENTATION & PROTOCOLS
+    items:
+      document_findings:
+        type: checkbox
+        label: "Remind team: document findings in personal notes"
+      review_protocol:
+        type: checkbox
+        label: Review protocol for clue found / subject found
+
+  final_check:
+    title: FINAL CHECK
+    items:
+      questions:
+        type: checkbox
+        label: "Ask: questions, concerns, anything missed?"
+      remind_approach:
+        type: checkbox
+        label: "Remind: approach TL privately any time with concerns"
