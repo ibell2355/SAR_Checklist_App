@@ -7,6 +7,7 @@
 # Supported item types:
 #   checkbox   — standard check-off item
 #   text       — short text input field
+#   date       — date picker field
 #   team_list  — team member list with role assignment
 #
 # Optional item fields:
@@ -22,13 +23,25 @@ subtitle: Complete before leaving Command Post
 version: 1
 
 sections:
+  search_info:
+    title: SEARCH INFORMATION
+    items:
+      search_manager:
+        type: text
+        label: Search Manager
+        report: true
+      file_number:
+        type: text
+        label: File Number
+        report: true
+
   briefing_team:
     title: BRIEFING & TEAM
     items:
       team_members:
         type: team_list
         label: Team Members
-        roles: [Medical, Navigator, Comms, Driver]
+        roles: [Team Lead, Medical, Navigator, Comms, Driver]
         report: true
       confirm_briefing:
         type: checkbox
@@ -121,6 +134,10 @@ sections:
   hazard_assessment:
     title: HAZARD ASSESSMENT
     items:
+      confirm_weather:
+        type: checkbox
+        label: Confirm weather conditions with team
+        helper: Review current and forecasted weather including wind, precipitation, temperature, and visibility.
       key_hazards:
         type: checkbox
         label: Re-state key hazards from main briefing

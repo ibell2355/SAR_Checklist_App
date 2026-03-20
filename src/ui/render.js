@@ -13,6 +13,7 @@ export function renderLanding() {
         <img class="landing-logo" src="./assets/psar_logo.png" alt="Parkland Search & Rescue">
         <h1>PSAR Team Lead Checklist</h1>
         <p class="subtle">Field tools for Search & Rescue</p>
+        <p class="landing-disclaimer">This checklist is a memory aid and does not replace required notebook documentation.</p>
       </div>
       <div class="landing-actions">
         <button class="btn btn-accent btn-block" data-action="open-checklist" data-id="pre_departure">
@@ -27,7 +28,7 @@ export function renderLanding() {
           <img class="qr-code" src="./assets/SAR_Checklist_App_QR.png" alt="App QR Code" width="44" height="44" role="button" tabindex="0" data-action="show-qr">
           <button class="btn btn-sm" data-action="toggle-theme">${theme === 'dark' ? 'Light Mode' : 'Dark Mode'}</button>
         </div>
-        <p class="reminder-text">This tool does not replace required notebook documentation.</p>
+        <p class="reminder-text">A field tool for Parkland Search &amp; Rescue team leaders.</p>
       </div>
     </div>`;
 }
@@ -68,7 +69,7 @@ export function renderChecklist(config, state) {
       <section class="checklist-section">
         <div class="section-header" data-action="toggle-section" data-section="${sectionId}">
           <h3>${esc(section.title)}</h3>
-          <span class="section-progress badge-sm">${sectionDone}/${cbIds.length}</span>
+          ${cbIds.length > 0 ? `<span class="section-progress badge-sm">${sectionDone}/${cbIds.length}</span>` : ''}
           <span class="section-chevron${isCollapsed ? ' rotated' : ''}">&#9660;</span>
         </div>
         <div class="section-body${isCollapsed ? ' collapsed' : ''}" data-section-body="${sectionId}">`;
@@ -96,7 +97,8 @@ export function renderChecklist(config, state) {
 function renderItem(id, item, state) {
   switch (item.type) {
     case 'checkbox': return renderCheckbox(id, item, state);
-    case 'text':     return renderTextField(id, item, state);
+    case 'text':
+    case 'date':     return renderTextField(id, item, state);
     case 'team_list': return renderTeamList(id, item, state);
     default: return '';
   }
@@ -114,10 +116,11 @@ function renderCheckbox(id, item, state) {
 
 function renderTextField(id, item, state) {
   const value = state.fields[id] || '';
+  const inputType = item.type === 'date' ? 'date' : 'text';
   return `
     <div class="field-item">
       <label class="field-label">${esc(item.label)}${item.helper ? `<span class="helper-text">${esc(item.helper)}</span>` : ''}</label>
-      <input type="text" data-field="${id}" value="${escAttr(value)}" placeholder="${escAttr(item.placeholder || '')}">
+      <input type="${inputType}" data-field="${id}" value="${escAttr(value)}" placeholder="${escAttr(item.placeholder || '')}">
     </div>`;
 }
 
@@ -163,9 +166,10 @@ export function renderTeamMembersInner(roles, teamMembers) {
 export function renderReport(config, state) {
   if (!config) return '<div class="panel"><p>Error loading configuration.</p></div>';
 
+  const timeOpts = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
   const timestamp = state.startedAt
-    ? new Date(state.startedAt).toLocaleString()
-    : new Date().toLocaleString();
+    ? new Date(state.startedAt).toLocaleString(undefined, timeOpts)
+    : new Date().toLocaleString(undefined, timeOpts);
 
   let html = `
     <div class="report-page">
@@ -185,7 +189,7 @@ export function renderReport(config, state) {
   const filledFields = [];
   for (const section of Object.values(config.sections)) {
     for (const [id, item] of Object.entries(section.items || {})) {
-      if (item.type === 'text' && item.report !== false && state.fields[id]) {
+      if ((item.type === 'text' || item.type === 'date') && item.report !== false && state.fields[id]) {
         filledFields.push({ label: item.label, value: state.fields[id] });
       }
     }
@@ -249,9 +253,10 @@ export function renderUnderConstruction() {
 export function buildReportText(config, state) {
   if (!config) return '';
 
+  const timeOpts = { year: 'numeric', month: 'numeric', day: 'numeric', hour: '2-digit', minute: '2-digit', hour12: false };
   const timestamp = state.startedAt
-    ? new Date(state.startedAt).toLocaleString()
-    : new Date().toLocaleString();
+    ? new Date(state.startedAt).toLocaleString(undefined, timeOpts)
+    : new Date().toLocaleString(undefined, timeOpts);
 
   let text = `${config.title}\n${'='.repeat(config.title.length)}\n\n`;
   text += `Date: ${timestamp}\n`;
@@ -259,7 +264,7 @@ export function buildReportText(config, state) {
   // Fields
   for (const section of Object.values(config.sections)) {
     for (const [id, item] of Object.entries(section.items || {})) {
-      if (item.type === 'text' && item.report !== false && state.fields[id]) {
+      if ((item.type === 'text' || item.type === 'date') && item.report !== false && state.fields[id]) {
         text += `${item.label}: ${state.fields[id]}\n`;
       }
     }

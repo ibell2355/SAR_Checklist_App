@@ -229,6 +229,12 @@ function handleChange(e) {
     updateProgress();
   }
 
+  // Field inputs (date picker, etc. that may only fire change)
+  if (el.dataset.field && el.type !== 'checkbox') {
+    state.fields[el.dataset.field] = el.value;
+    debounceSave();
+  }
+
   // Role checkboxes on team members
   if (el.dataset.role !== undefined && el.dataset.member !== undefined) {
     const mi = parseInt(el.dataset.member);

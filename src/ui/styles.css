@@ -115,7 +115,7 @@ body {
 
 /* ---- Inputs ---- */
 
-input[type="text"], select {
+input[type="text"], input[type="date"], select {
   display: block;
   width: 100%;
   margin-top: 4px;
@@ -235,6 +235,12 @@ input[type="text"]::placeholder { color: var(--muted); opacity: 0.7; }
   font-size: 1.4rem;
   margin: 0;
   color: var(--primary);
+}
+.landing-disclaimer {
+  font-size: 0.82rem;
+  color: var(--muted);
+  font-style: italic;
+  margin: 6px 0 0;
 }
 
 .landing-actions {
